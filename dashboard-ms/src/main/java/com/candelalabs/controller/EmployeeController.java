@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.candelalabs.domain.Employee;
 import com.candelalabs.exception.EmployeeNotFoundException;
-import com.candelalabs.model.Employee;
 import com.candelalabs.service.EmployeeService;
 
 @RestController

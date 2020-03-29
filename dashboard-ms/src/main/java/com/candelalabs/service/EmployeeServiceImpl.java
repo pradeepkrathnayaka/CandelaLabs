@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.candelalabs.domain.Employee;
 import com.candelalabs.exception.EmployeeNotFoundException;
-import com.candelalabs.model.Employee;
 import com.candelalabs.repository.EmployeeRepository;
 
 @Service

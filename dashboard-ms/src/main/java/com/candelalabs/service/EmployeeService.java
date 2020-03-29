@@ -2,7 +2,7 @@ package com.candelalabs.service;
 
 import java.util.List;
 
-import com.candelalabs.model.Employee;
+import com.candelalabs.domain.Employee;
 
 public interface EmployeeService {
 

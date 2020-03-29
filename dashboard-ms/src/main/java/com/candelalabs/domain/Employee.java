@@ -1,4 +1,4 @@
-package com.candelalabs.model;
+package com.candelalabs.domain;
 
 import java.io.Serializable;
 
