@@ -1,4 +1,4 @@
-package com.candelalabs.security;
+package com.candelalabs.service.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

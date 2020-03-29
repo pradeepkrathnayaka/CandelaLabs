@@ -1,4 +1,4 @@
-package com.candelalabs.security;
+package com.candelalabs.service.security;
 
 import java.io.Serializable;
 import java.util.Date;

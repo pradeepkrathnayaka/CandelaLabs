@@ -1,4 +1,4 @@
-package com.candelalabs.security.service;
+package com.candelalabs.service;
 
 import java.util.ArrayList;
 

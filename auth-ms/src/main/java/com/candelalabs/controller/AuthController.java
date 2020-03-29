@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.candelalabs.payload.JwtAuthRequest;
 import com.candelalabs.payload.JwtAuthResponse;
-import com.candelalabs.security.JwtUtils;
+import com.candelalabs.service.security.JwtUtils;
 
 @RestController
 @CrossOrigin

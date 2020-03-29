@@ -1,4 +1,4 @@
-package com.candelalabs.security;
+package com.candelalabs.service.security;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.candelalabs.security.service.UserDetailsServiceImpl;
+import com.candelalabs.service.UserDetailsServiceImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
