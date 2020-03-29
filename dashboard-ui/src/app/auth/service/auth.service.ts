@@ -5,15 +5,19 @@ import { map,tap, mapTo, catchError } from 'rxjs/operators';
 
 
 export class User{
-    constructor(public status:string,) {}  
+    constructor(public username:string,) {}  
+  }
+
+  export class JwtResponse{
+    constructor(
+      public jwttoken:string,
+       ) {}
   }
 
 @Injectable({
     providedIn: 'root'
   })
   export class AuthenticationService {
-
-    apiURL = environment.apiURL;
     
     private loggedUser:string;
     private readonly JWT_TOKEN = 'JWT_TOKEN';
@@ -21,15 +25,27 @@ export class User{
 
     constructor(private httpClient:HttpClient) { }
 
-    login(user:{username:string, password:string}):Observable<boolean>{
-        return this.httpClient.post<any>('config.apiUrl/login', user).pipe(
-            tap(tokens=>this.doLoginUser(user.username, tokens)), 
-            mapTo(true),
-            catchError(error=>{
-                alert(error.error);
-                return of(false);
-            })
-        );
+    // login(user:{username:string, password:string}):Observable<boolean>{
+    //     return this.httpClient.post<any>('config.apiUrl/login', user).pipe(
+    //         tap(tokens=>this.doLoginUser(user.username)), 
+    //         mapTo(true),
+    //         catchError(error=>{
+    //             alert(error.error);
+    //             return of(false);
+    //         })
+    //     );
+    // }
+
+    login(username:string, password:string){
+      const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+        return this.httpClient.post<User>('http://localhost:8080/authenticate',{headers}).pipe(
+          map(
+            data => {
+             sessionStorage.setItem('username',username);
+             return data;
+            }
+          ) 
+         );
     }
 
     authenticate(username, password) {
@@ -43,7 +59,6 @@ export class User{
           ) 
          );
       }
-
 
       isLoggedIn() {
         let user = sessionStorage.getItem('username')
@@ -63,30 +78,24 @@ export class User{
         sessionStorage.removeItem('username')
       }
 
-      getRefreshToken(){}
-
-      doLoginUser(username:string, tokens:Tokens){
-        this.loggedUser = username;
-        this.storeTokens(tokens);
-      }
-
       doLogoutUser(){
           this.loggedUser = null;
-          this.removeTokens();
+          //this.removeTokens();
       }
 
-      refreshToken(){
-          return this.httpClient.post<any>('${config.apiUrl}/refresh', {
-            'refreshToken':this.getRefreshToken()}).pipe(tap((tokens:Tokens)=>{
-                this.storeTokens(tokens.twt);
-            }))
-          })
-      }
+         getRefreshToken(){}
+
+      // refreshToken(){
+      //     return this.httpClient.post<any>('${config.apiUrl}/refresh', {
+      //       'refreshToken':this.getRefreshToken()}).pipe(tap((tokens:Tokens)=>{
+      //           this.storeTokens(tokens.twt);
+      //       }))
+      //     })
+      // }
 
       getJwtToken(){}
 
       removeTokens(){}
 
-      storeTokens(tokens:Tokens){}
-
+      //storeTokens(tokens:Tokens){}
   }

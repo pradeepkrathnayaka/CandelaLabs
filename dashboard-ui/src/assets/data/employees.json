@@ -1,9 +1,11 @@
-[
-    { "id": 1, "firstName1": "Pradeep_1", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 2, "firstName2": "Pradeep_2", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 3, "firstName3": "Pradeep_3", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 4, "firstName4": "Pradeep_41", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 5, "firstName5": "Pradeep_5", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 6, "firstName6": "Pradeep_6", "lastName": "Rathnayaka_2", "email": "test@gmail.com" },
-    { "id": 7, "firstName7": "Pradeep_7", "lastName": "Rathnayaka_2", "email": "test@gmail.com" }
-]
+[{
+    "id": 1,
+    "firstName": "Pradeep",
+    "lastName": "Rathnayaka",
+    "gender": "Male",
+    "email": "aaaa",
+    "phone": 12345,
+    "dateOfBirth": "2014-01-01T23:28:56.782Z",
+    "department": "HR",
+    "isActive": true
+}]

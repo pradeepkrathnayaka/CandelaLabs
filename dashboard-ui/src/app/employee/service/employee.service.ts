@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable,fromEvent, of, from } from "rxjs";
-import { tap, map } from 'rxjs/operators';
-import { IEmployee } from '../employee/employee';
+import { tap, map, catchError } from 'rxjs/operators';
+import { Employee } from '../employee';
+
 
 
 @Injectable({
@@ -18,33 +19,53 @@ export class EmployeeService {
   
   httpOptions = {};
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient:HttpClient) { }
+
+  getEmployeesList(): Observable<Employee[]>{
+    return this.httpClient.get<Employee[]>(this._url)
+      .pipe(
+        tap(resp=>this.log('Employees list = ${JSON.stringify(resp)}')),
+        catchError(error=>of([]))
+      );
   }
 
-  getEmployeesList():Observable<IEmployee[]>{
-    return this.httpClient.get<IEmployee[]>(this._url);
+  public getEmployees(): Observable<Employee[]>  {
+    console.log("Get employees list!");
+    return this.httpClient.get<Employee[]>('http://localhost:8080/employees')
+    .pipe(
+      tap(resp=>this.log('Employees list = ${JSON.stringify(resp)}')),
+      catchError(error=>of([]))
+    );
   }
 
-  public getEmployees():Observable<IEmployee[]>  {
-    console.log("Get employees!");
-    return this.httpClient.get<IEmployee[]>('http://localhost:8080/employees');
+  public getEmployeeById(id:number) : Observable<Employee>{
+    return this.httpClient.get<Employee>("http://localhost:8080/employees" + "/"+ id)
+    .pipe(
+      tap(resp=>this.log('Employees  = ${JSON.stringify(resp)}')),
+      catchError(error=>of(new Employee()))
+    );
   }
 
-  public getEmployee(employee) {
-    return this.httpClient.get<IEmployee>("http://localhost:8080/employees" + "/"+ employee.id);
+  public deleteEmployeeById(id:number): Observable<Employee> {
+    return this.httpClient.delete<Employee>("http://localhost:8080/employees" + "/"+ id)
+    .pipe(
+      tap(_=>this.log('Deleted Employee = ${id}')),
+      catchError(error=>of(null))
+    );
   }
 
-  public deleteEmployee(employee) {
-    return this.httpClient.delete<IEmployee>("http://localhost:8080/employees" + "/"+ employee.id);
+  public addEmployee(newEmployee:Employee): Observable<Employee> {
+    return this.httpClient.post<Employee>("http://localhost:8080/employees", newEmployee)
+    .pipe(
+      tap((resp:Employee)=>this.log('Added New Employee = ${JSON.stringify(resp)}')),
+      catchError(error=>of(new Employee()))
+    );
   }
 
-  public createEmployee(employee) {
-    return this.httpClient.post<IEmployee>("http://localhost:8080/employees", employee);
-  }
-
-  public updateEmployee(employee:IEmployee) : Observable<any> {
+  public updateEmployee(employee:Employee) : Observable<any> {
     return this.httpClient.put("http://localhost:8080/employees", employee, this.httpOptions ).pipe(
-      tap(_=>this.log("updated here id=${employee.id}")), catchError(this.handleError<any>('update employee'))
+      tap(_=>this.log("updated here id=${employee.id}")), 
+      catchError(this.handleError<any>('update employee'))
     );
   }
 
@@ -58,6 +79,5 @@ export class EmployeeService {
       this.log('${operation} failed: ${error.message}');
       return of(restult as T)
     }
-  }
-  
+  }  
 }

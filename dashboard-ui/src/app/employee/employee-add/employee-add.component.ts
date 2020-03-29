@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { EmployeeService } from 'src/app/service/employee.service';
-import { IEmployee } from '../employee';
+
 import { Observable } from 'rxjs';
+import { Employee } from '../employee';
+import { EmployeeService } from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -12,12 +13,13 @@ import { Observable } from 'rxjs';
 })
 export class EmployeeAddComponent implements OnInit, OnDestroy {
 
+  model: any = {};
   @Input() id:number;
   @Input() firstName:string;
   @Input() lastName:string;
   @Input() email:string;
 
-  user: IEmployee = new IEmployee(1,"","","");
+  employee: Employee = new Employee();
 
   constructor(private _employeeService: EmployeeService) { }
 
@@ -25,18 +27,16 @@ export class EmployeeAddComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    this._employeeService.createEmployee(this.user)
+    this._employeeService.addEmployee(this.employee)
         .subscribe( data => {
           alert("Employee created successfully.");
         });
   };
 
-  cancel():void{
-    
+  cancel():void{    
   }
 
   ngOnDestroy(){
-
   }
 
 }

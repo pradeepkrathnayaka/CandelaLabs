@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from 'src/app/service/employee.service';
+
 import { Observable, observable } from 'rxjs';
+import { EmployeeService } from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-detail',
@@ -12,13 +13,10 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(private _employeeService: EmployeeService) { }
 
   ngOnInit(): void {
-    this._employeeService.getEmployee()
-      .subscribe(data => this.employees = data);
+    this._employeeService.getEmployeeById(id:number);
   }
 
   private setLoadingSpinner(observer:Observable<any>){
-    //this.loading = true;
-   // observable.sub
   }
 
 }
