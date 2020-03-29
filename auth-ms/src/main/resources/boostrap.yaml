@@ -1,2 +1,0 @@
-jwt.secret=test$secret
-jwt.get.token.uri=/authenticate
