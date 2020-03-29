@@ -1,21 +1,21 @@
 package com.candelalabs.exception;
 
-public class EmployeeNotFoundException extends RuntimeException {
+public class RecordNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public EmployeeNotFoundException() {
+	public RecordNotFoundException() {
 	}
 
-	public EmployeeNotFoundException(String msg) {
+	public RecordNotFoundException(String msg) {
 		super(msg);
 	}
 
-	public EmployeeNotFoundException(String msg, Throwable cause) {
+	public RecordNotFoundException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public EmployeeNotFoundException(Throwable cause) {
+	public RecordNotFoundException(Throwable cause) {
 		super(cause);
 	}
 

@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.candelalabs.model.Employee;
+import com.candelalabs.domain.Employee;
 
 @ExtendWith(SpringExtension.class)
 @TestInstance(Lifecycle.PER_CLASS)

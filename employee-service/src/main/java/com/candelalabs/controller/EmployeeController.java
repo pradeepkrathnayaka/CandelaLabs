@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.candelalabs.domain.Employee;
-import com.candelalabs.exception.EmployeeNotFoundException;
+import com.candelalabs.exception.RecordNotFoundException;
 import com.candelalabs.service.EmployeeService;
 
 @RestController
@@ -34,13 +34,13 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/", consumes = "application/json", produces = "application/json")
-    ResponseEntity<Employee> addEmployee(@RequestBody Employee newEmployee) throws EmployeeNotFoundException{
+    ResponseEntity<Employee> addEmployee(@RequestBody Employee newEmployee) throws RecordNotFoundException{
         Employee empUpdated = employeeService.saveOrUpdateEmployee(newEmployee);
         return new ResponseEntity<Employee>(empUpdated, new HttpHeaders(), HttpStatus.CREATED);
     }
 
 	@GetMapping("/{id}")
-	ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) throws EmployeeNotFoundException{
+	ResponseEntity<Employee> findEmployeeById(@PathVariable Long id) throws RecordNotFoundException{
 		Employee emp = employeeService.findEmployeeById(id);
 		return new ResponseEntity<Employee>(emp, new HttpHeaders(), HttpStatus.OK);
 	}
